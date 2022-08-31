@@ -31,7 +31,6 @@ jobs:
 
       - name: deploye storage account
         uses: Azure/arm-deploy@v1
-        id: storageAccountDeploy
         with:
           scope: resourcegroup
           resourceGroupName: bhaimazaaagaya
@@ -40,5 +39,3 @@ jobs:
             location="west europe"
             storageAccountName=blobalstg002
           deploymentMode: Incremental
-
-      - run: echo ${{ steps.storageAccountDeploy.outputs.BlobUri }}
