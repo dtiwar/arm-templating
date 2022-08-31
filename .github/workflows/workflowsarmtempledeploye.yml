@@ -18,15 +18,15 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
 
-      # - name: deploye Resource Group rg-githubaction with az cli
-      #   uses: Azure/cli@v1
-      #   with:
-      #     inlinescript: |
-      #       az deployment sub create --location "west europe" --template-file ./arm-templates/resourcegroup.json
-
-      - name: delete all the resources in the subscription
-        uses: Azure/powershell@v1
+      - name: deploye Resource Group rg-githubaction with az cli
+        uses: Azure/cli@v1
         with:
           inlinescript: |
-            Get-AzResourceGroup | Remove-AzResourceGroup -Force
-          azPSVersion: "latest"
+            az deployment sub create --location "west europe" --template-file ./arm-templates/resourcegroup.json
+
+      # - name: delete all the resources in the subscription
+      #   uses: Azure/powershell@v1
+      #   with:
+      #     inlinescript: |
+      #       Get-AzResourceGroup | Remove-AzResourceGroup -Force
+      #     azPSVersion: "latest"
