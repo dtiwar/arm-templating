@@ -22,3 +22,10 @@ jobs:
         with:
           inlinescript: |
             az deployment sub create --location "west europe" --template-file ./arm-templates/resourcegroup.json
+
+      - name: delete all the resources in the subscription
+        uses: Azure/powershell@v1
+        with:
+          inlinescript: |
+            Get-AzResourceGroup | Remove-AzResourceGroup
+          azPSVersion: "latest"
