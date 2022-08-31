@@ -25,7 +25,7 @@ jobs:
           subscriptionId: b85551af-48a0-4d5b-aede-ee9d33826d2d
           region: west europe
           template: ./arm-templates/resourcegroup.json
-          parameters: location ="west europe"
+          parameters: location="west europe"
             resourceGroupName="bhaimazaaagaya"
           deploymentName: rg-githubaction
 
