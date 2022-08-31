@@ -1,0 +1,32 @@
+# This is a basic workflow to help you get started with Actions
+
+name: ArmTempleteDeployment
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  ArmDeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          enable-AzPSSession: true
+
+      - name: deploye Resource Group rg-githubaction with az cli
+        uses: Azure/cli@v1
+        with:
+          inlinescript: |
+            az deployment sub create --location "west europe" --template-file ./arm-templates/resourcegroup.json
+
+      # - name: delete all the resources in the subscription
+      #   uses: Azure/powershell@v1
+      #   with:
+      #     inlinescript: |
+      #       Get-AzResourceGroup | Remove-AzResourceGroup -Force
+      #     azPSVersion: "latest"
