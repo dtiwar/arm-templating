@@ -2,9 +2,9 @@
 
 name: ArmTempleteDeployment
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
   workflow_dispatch:
 env:
   subscriptionId: b85551af-48a0-4d5b-aede-ee9d33826d2d
