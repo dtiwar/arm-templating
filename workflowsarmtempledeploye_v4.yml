@@ -28,3 +28,17 @@ jobs:
           parameters: location="west europe"
             resourceGroupName="bhaimazaaagaya"
           deploymentName: rg-githubaction
+
+      - name: deploye storage account
+        uses: Azure/arm-deploy@v1
+        id: storageAccountDeploy
+        with:
+          scope: resourcegroup
+          resourceGroupName: bhaimazaaagaya
+          template: ./arm-templates/storageaccount.json
+          parameters: ./arm-templates/storageaccount.parameters.json
+            location="west europe"
+            storageAccountName=blobalstg002
+          deploymentMode: Incremental
+
+      - run: echo ${{ steps.storageAccountDeploy.outputs.BlobUri }}
