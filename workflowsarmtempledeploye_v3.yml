@@ -1,0 +1,44 @@
+# This is a basic workflow to help you get started with Actions
+
+name: ArmTempleteDeployment
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  ArmDeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          enable-AzPSSession: true
+
+      - name: deploy the new resources group if not exist
+        uses: Azure/arm-deploy@v1
+        with:
+          scope: subscription
+          subscriptionId: b85551af-48a0-4d5b-aede-ee9d33826d2d
+          region: west europe
+          template: ./arm-templates/resourcegroup.json
+          parameters: location ="west europe"
+            resourceGroupName="bhaimazaaagaya"
+          deploymentName: rg-githubaction
+
+      - name: deploye storage account
+        uses: Azure/arm-deploy@v1
+        id: storageAccountDeploy
+        with:
+          scope: resourcegroup
+          resourceGroupName: bhaimazaaagaya
+          template: ./arm-templates/storageaccount.json
+          parameters: ./arm-templates/storageaccount.parameters.json
+            location="west europe"
+            storageAccountName=blobalstg002
+          deploymentMode: Incremental
+
+      - run: echo ${{ steps.storageAccountDeploy.outputs.BlobUri }}
