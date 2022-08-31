@@ -42,4 +42,4 @@ jobs:
           deploymentMode: Incremental
 
       - run: echo ${{ steps.storageAccountDeploy.outputs.BlobUri }}
-      - run echo 'completed'
+      - run: echo 'completed'
