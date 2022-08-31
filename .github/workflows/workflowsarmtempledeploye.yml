@@ -35,6 +35,6 @@ jobs:
           resourceGroupName: bhaimazaaagaya
           template: ./arm-templates/storageaccount.json
           parameters: ./arm-templates/storageaccount.parameters.json
-            location=west europe
+            location="west europe"
             storageAccountName=blobalstg002
           deploymentMode: Incremental
