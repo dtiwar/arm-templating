@@ -18,7 +18,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
 
-      - name: Deploy Azure Resource Manager (ARM) Template
+      - name: deploy the new resources group if not exist
         uses: Azure/arm-deploy@v1
         with:
           scope: subscription
@@ -28,11 +28,13 @@ jobs:
           deploymentName: rg-githubaction
           parameters: resourceGroupName=bhaimazaaagaya
 
-      - name: Deploy Azure Resource Manager (ARM) Template
+      - name: deploye storage account
         uses: Azure/arm-deploy@v1
         with:
           scope: resourcegroup
           resourceGroupName: bhaimazaaagaya
           template: ./arm-templates/storageaccount.json
           parameters: ./arm-templates/storageaccount.parameters.json
+            location=west europe
+            storageAccountName=blobalstg002
           deploymentMode: Incremental
